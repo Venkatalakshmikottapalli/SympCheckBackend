@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# SympCheckBackend
-This is Sympcheck chatbot backend
-=======
 
 # SympCheck
 
@@ -90,15 +86,16 @@ This project is licensed under the MIT License.
 
     python api\main.py 
 
-1. Initialize the git repository
-    git init
-2. Add and commit changes
-    git add .
-    git commit -m "Initial commit"
-3. Add the remote repository
-    git remote add origin <REMOTE_URL>
-4. Push to Remote Repository
-    git branch -M main  # Rename the default branch to main if needed
-    git push -u origin main
+Git Commands: 
 
->>>>>>> 0a62e00 (Initial commit)
+echo "# SympCheckBackend" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Venkatalakshmikottapalli/SympCheckBackend.git
+git push -u origin main
+
+git remote add origin https://github.com/Venkatalakshmikottapalli/SympCheckBackend.git
+git branch -M main
+git push -u origin main
