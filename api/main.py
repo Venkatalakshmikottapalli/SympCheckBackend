@@ -6,17 +6,24 @@ import os
 app = Flask(__name__)
 
 
-# Get the directory of the current script
-current_dir = os.path.dirname(__file__)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(current_dir, '..', 'data', 'models', 'symp_check_model.pkl')
+vectorizer_path = os.path.join(current_dir, '..', 'data', 'models', 'symp_check_vectorizer.pkl')
 
-# Construct the path relative to the script's directory
-model_path = os.path.join(current_dir, 'data', 'models', 'symp_check_model.pkl')
-vectorizer_path = os.path.join(current_dir, 'data', 'models', 'symp_check_vectorizer.pkl')
+# Verify the paths
+print(f"Current working directory: {os.getcwd()}")
+print(f"Model path: {model_path}")
+print(f"Vectorizer path: {vectorizer_path}")
+
+# Check if files exist
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Model file not found: {model_path}")
+if not os.path.exists(vectorizer_path):
+    raise FileNotFoundError(f"Vectorizer file not found: {vectorizer_path}")
 
 # Load the model and vectorizer
 model = joblib.load(model_path)
 vectorizer = joblib.load(vectorizer_path)
-
 # Load the model and vectorizer
 # model = joblib.load('data\models\symp_check_model.pkl')
 # vectorizer = joblib.load('data\models\symp_check_vectorizer.pkl')
