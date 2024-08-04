@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
-model_path = os.path.join(current_dir, '..', 'data', 'models', 'symp_check_model.pkl')
-vectorizer_path = os.path.join(current_dir, '..', 'data', 'models', 'symp_check_vectorizer.pkl')
+model_path = os.path.join(current_dir, 'symp_check_model.pkl')
+vectorizer_path = os.path.join(current_dir, 'symp_check_vectorizer.pkl')
 
 # Verify the paths
 print(f"Current working directory: {os.getcwd()}")
@@ -25,8 +25,8 @@ if not os.path.exists(vectorizer_path):
 model = joblib.load(model_path)
 vectorizer = joblib.load(vectorizer_path)
 # Load the model and vectorizer
-# model = joblib.load('data\models\symp_check_model.pkl')
-# vectorizer = joblib.load('data\models\symp_check_vectorizer.pkl')
+# model = joblib.load('symp_check_model.pkl')
+# vectorizer = joblib.load('symp_check_vectorizer.pkl')
 
 @app.route('/')
 
