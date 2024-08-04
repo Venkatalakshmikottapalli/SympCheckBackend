@@ -5,7 +5,6 @@ import os
 
 app = Flask(__name__)
 
-
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(current_dir, 'symp_check_model.pkl')
 vectorizer_path = os.path.join(current_dir, 'symp_check_vectorizer.pkl')
@@ -24,12 +23,8 @@ if not os.path.exists(vectorizer_path):
 # Load the model and vectorizer
 model = joblib.load(model_path)
 vectorizer = joblib.load(vectorizer_path)
-# Load the model and vectorizer
-# model = joblib.load('symp_check_model.pkl')
-# vectorizer = joblib.load('symp_check_vectorizer.pkl')
 
 @app.route('/')
-
 def home():
     return "Welcome to the Symptoms Disease Prediction API!"
 
@@ -51,5 +46,6 @@ def predict():
     return jsonify({'prediction': prediction[0]})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=False)
-    #app.run(debug=True, use_reloader=False)
+    # Remove the app.run line for production
+    # app.run(host='0.0.0.0', port=8000, debug=False)
+    pass  # Gunicorn will serve the app
