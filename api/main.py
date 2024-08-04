@@ -1,12 +1,25 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
+import os
 
 app = Flask(__name__)
 
+
+# Get the directory of the current script
+current_dir = os.path.dirname(__file__)
+
+# Construct the path relative to the script's directory
+model_path = os.path.join(current_dir, 'data', 'models', 'symp_check_model.pkl')
+vectorizer_path = os.path.join(current_dir, 'data', 'models', 'symp_check_vectorizer.pkl')
+
 # Load the model and vectorizer
-model = joblib.load('data\models\symp_check_model.pkl')
-vectorizer = joblib.load('data\models\symp_check_vectorizer.pkl')
+model = joblib.load(model_path)
+vectorizer = joblib.load(vectorizer_path)
+
+# Load the model and vectorizer
+# model = joblib.load('data\models\symp_check_model.pkl')
+# vectorizer = joblib.load('data\models\symp_check_vectorizer.pkl')
 
 @app.route('/')
 
