@@ -106,5 +106,7 @@ def internal_server_error(e):
     """), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 0))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    # Change this to the number of workers you need
+    workers = 2  
+    # Running with Gunicorn
+    os.system(f'gunicorn -w {workers} -b 0.0.0.0:5000 {__name__}:app')
