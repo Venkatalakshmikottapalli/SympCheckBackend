@@ -6,8 +6,10 @@ app = Flask(__name__)
 
 print("Loading model and vectorizer")
 try:
-    model = joblib.load('symp_check_model.pkl')
-    vectorizer = joblib.load('symp_check_vectorizer.pkl')
+    model_path = os.path.join(os.path.dirname(__file__), 'symp_check_model.pkl')
+    vectorizer_path = os.path.join(os.path.dirname(__file__), 'symp_check_vectorizer.pkl')
+    model = joblib.load(model_path)
+    vectorizer = joblib.load(vectorizer_path)
     print("Model and vectorizer loaded successfully")
 except Exception as e:
     print(f"Error loading model or vectorizer: {str(e)}")
@@ -67,10 +69,10 @@ def model_info():
         'model_type': 'Support Vector Machine (SVM)',
         'training_data': 'Dataset of medical symptoms collected from various sources. The dataset contains approximately 10,000 samples and 50 features.',
         'performance_metrics': {
-            'accuracy': '0.85',  # It shoudl be replaced  with actual metrics
-            'precision': '0.83', #just to show how things will look.
-            'recall': '0.82',
-            'f1_score': '0.82'
+            'accuracy': '0.85',  # Replace with actual metrics
+            'precision': '0.83', # Replace with actual metrics
+            'recall': '0.82',    # Replace with actual metrics
+            'f1_score': '0.82'   # Replace with actual metrics
         }
     }
     return render_template_string("""
