@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import JSONResponse
 import joblib
 import numpy as np
@@ -7,7 +7,7 @@ import numpy as np
 # Initialize the FastAPI app
 app = FastAPI(
     title="Sympcheck",
-    description="Sympcheck prediction API. Visit this URL at port 8501 for the streamlit interface.",
+    description="Sympcheck prediction API. Visit this URL at port 8501 for the Streamlit interface.",
     version="0.1.0",
 )
 
@@ -17,8 +17,11 @@ model_path = os.path.join(current_dir, 'symp_check_model.pkl')
 vectorizer_path = os.path.join(current_dir, 'symp_check_vectorizer.pkl')
 
 # Load the model and vectorizer
-model = joblib.load(model_path)
-vectorizer = joblib.load(vectorizer_path)
+try:
+    model = joblib.load(model_path)
+    vectorizer = joblib.load(vectorizer_path)
+except Exception as e:
+    raise RuntimeError(f"Error loading model or vectorizer: {str(e)}")
 
 @app.get("/")
 def home():
@@ -30,13 +33,13 @@ async def predict(request: Request):
     symptoms = data.get('symptoms', '')
 
     if not symptoms:
-        return JSONResponse(content={'error': 'No symptoms provided'}, status_code=400)
+        raise HTTPException(status_code=400, detail='No symptoms provided')
 
     # Transform the input symptoms using the vectorizer
     symptoms_vec = vectorizer.transform([symptoms])
 
     # Make a prediction
     prediction = model.predict(symptoms_vec)
-    
+
     # Return the prediction as a JSON response
     return JSONResponse(content={'prediction': prediction[0]})
