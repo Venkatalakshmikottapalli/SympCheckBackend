@@ -6,8 +6,8 @@ app = Flask(__name__)
 
 print("Loading model and vectorizer")
 try:
-    model = joblib.load('api\symp_check_model.pkl')
-    vectorizer = joblib.load('api\symp_check_vectorizer.pkl')
+    model = joblib.load('symp_check_model.pkl')
+    vectorizer = joblib.load('symp_check_vectorizer.pkl')
     print("Model and vectorizer loaded successfully")
 except Exception as e:
     print(f"Error loading model or vectorizer: {str(e)}")
