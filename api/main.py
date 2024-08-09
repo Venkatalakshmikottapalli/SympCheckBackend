@@ -66,26 +66,13 @@ def predict():
 @app.route('/model_info', methods=['GET'])
 def model_info():
     info = {
-        'model_type': 'Support Vector Machine (SVM)',
-        'training_data': 'Dataset of medical symptoms collected from various sources. The dataset contains approximately 10,000 samples and 50 features.',
-        'performance_metrics': {
-            'accuracy': '0.85',  # Replace with actual metrics
-            'precision': '0.83', # Replace with actual metrics
-            'recall': '0.82',    # Replace with actual metrics
-            'f1_score': '0.82'   # Replace with actual metrics
-        }
+        'model_type': 'Logistic Regression',
+        'training_data': 'The dataset includes nearly 493,890 samples of symptoms for various diseases, with each entry consisting of a query (symptoms) and a response (disease). This extensive data ensures a robust training process for accurate predictions.',
     }
     return render_template_string("""
         <h1>Model Information</h1>
         <p><strong>Model Type:</strong> {{ info.model_type }}</p>
         <p><strong>Training Data:</strong> {{ info.training_data }}</p>
-        <h2>Performance Metrics:</h2>
-        <ul>
-            <li>Accuracy: {{ info.performance_metrics.accuracy }}</li>
-            <li>Precision: {{ info.performance_metrics.precision }}</li>
-            <li>Recall: {{ info.performance_metrics.recall }}</li>
-            <li>F1 Score: {{ info.performance_metrics.f1_score }}</li>
-        </ul>
         <a href="/">Back to Home</a>
     """, info=info)
 
