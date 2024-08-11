@@ -1,23 +1,30 @@
+#import the libraries
 import os
 import joblib
 from flask import Flask, request, jsonify, render_template_string
 
+# Set up Flask
 app = Flask(__name__)
 
+# Load model and vectorizer
 print("Loading model and vectorizer")
 try:
+    #Assign the path for machine learning models
     model_path = os.path.join(os.path.dirname(__file__), 'symp_check_model.pkl')
     vectorizer_path = os.path.join(os.path.dirname(__file__), 'symp_check_vectorizer.pkl')
+    #Load the model
     model = joblib.load(model_path)
     vectorizer = joblib.load(vectorizer_path)
     print("Model and vectorizer loaded successfully")
 except Exception as e:
+    # Exception handling if modle not loaded
     print(f"Error loading model or vectorizer: {str(e)}")
     model = None
     vectorizer = None
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
+    #it loads the form to enter the symptoms and receives the symptoms
     if request.method == 'POST':
         symptoms = request.form['symptoms']
         try:
@@ -29,6 +36,7 @@ def home():
                 <a href="/">Try another prediction</a>
             """, symptoms=symptoms, prediction=prediction)
         except Exception as e:
+            #Handle the exception
             return f"An error occurred: {str(e)}"
 
     return render_template_string("""
@@ -45,6 +53,7 @@ def home():
     """)
 
 def predict_disease(symptoms):
+     # Predict disease from symptoms
     if model is None or vectorizer is None:
         raise Exception("Model or vectorizer not loaded")
     symptoms_vec = vectorizer.transform([symptoms])
@@ -53,6 +62,7 @@ def predict_disease(symptoms):
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    # Handle API predictions
     data = request.json
     symptoms = data.get('symptoms', '')
     if not symptoms:
@@ -65,6 +75,7 @@ def predict():
 
 @app.route('/model_info', methods=['GET'])
 def model_info():
+     # Display model information
     info = {
         'model_type': 'Logistic Regression',
         'training_data': 'The dataset includes nearly 493,890 samples of symptoms for various diseases, with each entry consisting of a query (symptoms) and a response (disease). This extensive data ensures a robust training process for accurate predictions.',
@@ -78,6 +89,7 @@ def model_info():
 
 @app.errorhandler(404)
 def page_not_found(e):
+    # Handle 404 errors
     return render_template_string("""
         <h1>404: Page Not Found</h1>
         <p>The page you requested could not be found.</p>
@@ -86,6 +98,7 @@ def page_not_found(e):
 
 @app.errorhandler(500)
 def internal_server_error(e):
+     # Handle 500 errors
     return render_template_string("""
         <h1>500: Internal Server Error</h1>
         <p>An unexpected error occurred. Please try again later.</p>

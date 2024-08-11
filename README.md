@@ -1,101 +1,68 @@
+# SympCheck README
 
-# SympCheck
+## Table of Contents
+1. [Overview](#1-overview)
+2. [Design Document](#2-design-document)
+3. [Architecture Document](#3-architecture-document)
+4. [Configuration](#4-configuration)
+5. [Setup Instructions](#5-setup-instructions)
+   - 5.1 [Prerequisites](#51-prerequisites)
+   - 5.2 [Installation](#52-installation)
+   - 5.3 [Run the Streamlit App](#53-run-the-streamlit-app)
+6. [Usage](#6-usage)
 
-SympCheck is a health diagnostic tool that identifies potential diseases based on user-provided symptoms.
+## 1. Overview
+SympCheck is a health diagnostic tool that identifies potential diseases based on user-provided symptoms. The project leverages natural language processing (NLP) techniques combined with a machine learning model to deliver accurate predictions through a user-friendly interface built with Streamlit.
 
-## Project Structure
+## 2. Design document
 
-SYMP_CHECK_BE_PROJECT/
-├── api/
-│   ├── __init__.py
-│   └── main.py
-├── requirements.txt
-├── app/
-│   ├── ai/
-│   │   ├── __init__.py
-│   │   ├── model.py
-│   │   ├── ner_model.py
-│   │   └── predict.py
-│   └── main/
-│       └── __init__.py
-├── data/
-│   ├── models/
-│   │   ├── er_symptom_model
-│   │   ├── symp_check_model.pkl
-│   │   └── symp_check_vectorizer.pkl
-│   └── processed/
-│       ├── symptoms_disease.csv
-│       └── symptoms_sentences.csv
-├── notebooks/
-│   ├── EDA.ipynb
-│   └── model_building.ipynb
-├── .gitignore
-├── index.py
-└── README.md
+Please refer to the [sympcheck design document](docs/development.md).
 
+## 3. Architecture document
 
-## How to Run
+Please refer to the [sympcheck architecture Document](docs/architecture.md).
 
-1. Install dependencies:
-    ```sh
-    pip install -r requirements.txt
-    ```
-    set the path
-    $env:PYTHONPATH="$env:PYTHONPATH;."
+## 4. API Access
 
-2. Start the application:
-    ```sh
-    python api\main.py 
-    ```
+Here, you can access the API without setup in your local machine.
 
-## Configuration
+- **SympcheckBackend Production**: https://sympcheckbe-88b42835620c.herokuapp.com/
+- **SympcheckBackend TestNet**: https://sympcheckbetestnet-fffc66f498ef.herokuapp.com/
 
-## Deployment
+Additionally, a streamlined test tool has been created to test the API without relying on third-party API client tools:
 
-- For deployment, ensure that all dependencies are installed and the application is configured properly.
+![alt text](docs/image.png)
 
-## License
+## 5. Setup Instructions
 
-This project is licensed under the MIT License.
-
-## Setup Instructions
-
-### Prerequisites
-
+### 5.1 Prerequisites
 - Python 3.7 or higher
-- Virtual environment (optional but recommended)
+- Flask 
 
-### Installation
+### 5.2 Installation
 
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/yourusername/SympCheck.git
-   cd SympCheck
+- **Clone the Repository:**
+```sh
+git clone https://github.com/Venkatalakshmikottapalli/SympCheckBackend.git
+cd SympCheckBackend
+```
+- **Install the Required Dependencies:**
 
-2.  Create a virtual environment and activate it:
+```sh
+pip install -r requirements.txt
+```
 
-    python -m venv env
-    env\Scripts\activate  # On Windows
-    source env/bin/activate  # On macOS/Linux
-
-3.  Install the required dependencies:
-
-    pip install -r requirements.txt
-
-4.  Run the backend app:
-
+### 5.4. Run the Flask API:
+```sh
     python api\main.py 
+```
 
-Git Commands: 
+## 6. Usage
+After setting up, you can access the SympCheck API in your web browser at http://localhost:5000/.
 
-echo "# SympCheckBackend" >> README.md
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/Venkatalakshmikottapalli/SympCheckBackend.git
-git push -u origin main
+![alt text](docs/image-1.png)
 
-git remote add origin https://github.com/Venkatalakshmikottapalli/SympCheckBackend.git
-git branch -M main
-git push -u origin main
+Once you verify that API up and running then you can move on setup UI project
+
+Follow the [Backend installation setup](https://github.com/Venkatalakshmikottapalli/SympCheck/blob/main/README.md)
+
