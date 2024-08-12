@@ -8,7 +8,6 @@
 5. [Setup Instructions](#5-setup-instructions)
    - 5.1 [Prerequisites](#51-prerequisites)
    - 5.2 [Installation](#52-installation)
-   - 5.3 [Run the Streamlit App](#53-run-the-streamlit-app)
 6. [Usage](#6-usage)
 
 ## 1. Overview
